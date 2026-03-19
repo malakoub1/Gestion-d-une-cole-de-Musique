@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Cours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 550px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 th:text="${cours.id == null} ? 'Ajouter un cours' : 'Modifier un cours'"></h1>
+
+    <form th:action="@{/cours/save}" th:object="${cours}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Jour</label>
+        <input type="text" th:field="*{jour}" placeholder="Ex: Lundi" required>
+
+        <label>Heure de début</label>
+        <input type="time" th:field="*{heureDebut}" required>
+
+        <label>Durée en minutes</label>
+        <input type="number" th:field="*{dureeMin}" required>
+
+        <label>Niveau</label>
+        <input type="text" th:field="*{niveau}" placeholder="Débutant, Intermédiaire..." required>
+
+        <label>Professeur</label>
+        <select th:field="*{prof}" required>
+            <option value="">-- Choisir un professeur --</option>
+            <option th:each="prof : ${profs}"
+                    th:value="${prof.id}"
+                    th:text="${prof.nom + ' - ' + prof.specialite}">
+            </option>
+        </select>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <a class="back" th:href="@{/cours}">← Retour à la liste</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistiques</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 85%;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: white;
+            width: 260px;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h2 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+            color: #111827;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Tableau de bord - Statistiques</h1>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h2>Nombre de cours</h2>
+            <p th:text="${nbCoursSemaine}"></p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Instruments disponibles</h2>
+            <p th:text="${nbInstrumentsDisponibles}"></p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Instruments indisponibles</h2>
+            <p th:text="${nbInstrumentsIndisponibles}"></p>
+        </div>
+    </div>
+
+    <a class="back" th:href="@{/}">← Retour à l’accueil</a>
+</div>
+
+</body>
+</html>

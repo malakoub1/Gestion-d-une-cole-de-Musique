@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des professeurs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .action-link {
+            text-decoration: none;
+            margin: 0 5px;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .action-link.delete {
+            color: #dc2626;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-actions">
+        <h1>Liste des professeurs</h1>
+        <a class="btn" th:href="@{/profs/new}">+ Ajouter un professeur</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Spécialité</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prof : ${profs}">
+            <td th:text="${prof.id}"></td>
+            <td th:text="${prof.nom}"></td>
+            <td th:text="${prof.specialite}"></td>
+            <td>
+                <a class="action-link" th:href="@{/profs/edit/{id}(id=${prof.id})}">Modifier</a>
+                <a class="action-link delete" th:href="@{/profs/delete/{id}(id=${prof.id})}"
+                   onclick="return confirm('Voulez-vous vraiment supprimer ce professeur ?')">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="back" th:href="@{/}">← Retour à l’accueil</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Instrument</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 th:text="${instrument.id == null} ? 'Ajouter un instrument' : 'Modifier un instrument'"></h1>
+
+    <form th:action="@{/instruments/save}" th:object="${instrument}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Nom</label>
+        <input type="text" th:field="*{nom}" required>
+
+        <label>Famille</label>
+        <input type="text" th:field="*{famille}" placeholder="Ex: Cordes, Vents..." required>
+
+        <label>Disponibilité</label>
+        <select th:field="*{disponibilite}">
+            <option th:value="true">Disponible</option>
+            <option th:value="false">Indisponible</option>
+        </select>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <a class="back" th:href="@{/instruments}">← Retour à la liste</a>
+</div>
+
+</body>
+</html>

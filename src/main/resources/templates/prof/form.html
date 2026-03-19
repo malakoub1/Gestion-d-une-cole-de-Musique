@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Professeur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 th:text="${prof.id == null} ? 'Ajouter un professeur' : 'Modifier un professeur'"></h1>
+
+    <form th:action="@{/profs/save}" th:object="${prof}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Nom</label>
+        <input type="text" th:field="*{nom}" required>
+
+        <label>Spécialité</label>
+        <input type="text" th:field="*{specialite}" placeholder="Ex: Piano, Guitare..." required>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <a class="back" th:href="@{/profs}">← Retour à la liste</a>
+</div>
+
+</body>
+</html>

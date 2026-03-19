@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des cours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 95%;
+            margin: 30px auto;
+        }
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        a.btn, button {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        a.btn:hover, button:hover {
+            background: #1d4ed8;
+        }
+
+        form {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        input {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .action-link {
+            text-decoration: none;
+            margin: 0 5px;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .action-link.delete {
+            color: #dc2626;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-actions">
+        <h1>Liste des cours</h1>
+        <a class="btn" th:href="@{/cours/new}">+ Ajouter un cours</a>
+    </div>
+
+    <form th:action="@{/cours}" method="get">
+        <input type="text" name="niveau" placeholder="Niveau" th:value="${niveau}">
+        <input type="text" name="jour" placeholder="Jour" th:value="${jour}">
+        <button type="submit">Filtrer</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jour</th>
+            <th>Heure début</th>
+            <th>Durée (min)</th>
+            <th>Niveau</th>
+            <th>Professeur</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cours : ${coursList}">
+            <td th:text="${cours.id}"></td>
+            <td th:text="${cours.jour}"></td>
+            <td th:text="${cours.heureDebut}"></td>
+            <td th:text="${cours.dureeMin}"></td>
+            <td th:text="${cours.niveau}"></td>
+            <td th:text="${cours.prof != null ? cours.prof.nom : 'Non affecté'}"></td>
+            <td>
+                <a class="action-link" th:href="@{/cours/edit/{id}(id=${cours.id})}">Modifier</a>
+                <a class="action-link delete" th:href="@{/cours/delete/{id}(id=${cours.id})}"
+                   onclick="return confirm('Voulez-vous vraiment supprimer ce cours ?')">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="back" th:href="@{/}">← Retour à l’accueil</a>
+</div>
+
+</body>
+</html>
