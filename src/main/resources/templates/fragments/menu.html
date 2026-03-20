@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+<div th:fragment="menu">
+    <nav style="background: #0f172a; padding: 14px 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+        <a th:href="@{/}" style="color: white; margin: 0 14px; text-decoration: none; font-weight: bold;">Accueil</a>
+        <a th:href="@{/instruments}" style="color: white; margin: 0 14px; text-decoration: none; font-weight: bold;">Instruments</a>
+        <a th:href="@{/profs}" style="color: white; margin: 0 14px; text-decoration: none; font-weight: bold;">Professeurs</a>
+        <a th:href="@{/cours}" style="color: white; margin: 0 14px; text-decoration: none; font-weight: bold;">Cours</a>
+        <a th:href="@{/stats}" style="color: white; margin: 0 14px; text-decoration: none; font-weight: bold;">Statistiques</a>
+    </nav>
+</div>
+</body>
+</html>

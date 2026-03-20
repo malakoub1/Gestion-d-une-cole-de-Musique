@@ -5,10 +5,9 @@
     <title>Liste des professeurs</title>
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background: #f8fafc;
-            margin: 0;
-            padding: 0;
         }
 
         .container {
@@ -16,11 +15,11 @@
             margin: 30px auto;
         }
 
-        h1 {
+        h2 {
             color: #1e3a8a;
         }
 
-        .top-actions {
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -31,8 +30,9 @@
             background: #2563eb;
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
+            padding: 10px 16px;
             border-radius: 8px;
+            font-weight: bold;
         }
 
         .btn:hover {
@@ -43,13 +43,15 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
         }
 
         th, td {
             padding: 14px;
-            border-bottom: 1px solid #eee;
             text-align: center;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         th {
@@ -57,30 +59,41 @@
             color: white;
         }
 
-        .action-link {
-            text-decoration: none;
-            margin: 0 5px;
-            color: #2563eb;
-            font-weight: bold;
+        tr:hover {
+            background: #f9fafb;
         }
 
-        .action-link.delete {
+        .action {
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 6px;
+        }
+
+        .edit {
+            color: #2563eb;
+        }
+
+        .delete {
             color: #dc2626;
         }
 
-        .back {
+        .back-link {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 18px;
             text-decoration: none;
             color: #1e3a8a;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/menu :: menu"></div>
+
 <div class="container">
-    <div class="top-actions">
-        <h1>Liste des professeurs</h1>
+    <div class="top-bar">
+        <h2>Liste des professeurs</h2>
         <a class="btn" th:href="@{/profs/new}">+ Ajouter un professeur</a>
     </div>
 
@@ -99,16 +112,21 @@
             <td th:text="${prof.nom}"></td>
             <td th:text="${prof.specialite}"></td>
             <td>
-                <a class="action-link" th:href="@{/profs/edit/{id}(id=${prof.id})}">Modifier</a>
-                <a class="action-link delete" th:href="@{/profs/delete/{id}(id=${prof.id})}"
-                   onclick="return confirm('Voulez-vous vraiment supprimer ce professeur ?')">Supprimer</a>
+                <a class="action edit" th:href="@{/profs/edit/{id}(id=${prof.id})}">Modifier</a>
+                <a class="action delete"
+                   th:href="@{/profs/delete/{id}(id=${prof.id})}"
+                   onclick="return confirm('Voulez-vous vraiment supprimer ce professeur ?')">
+                    Supprimer
+                </a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <a class="back" th:href="@{/}">← Retour à l’accueil</a>
+    <a class="back-link" th:href="@{/}">← Retour à l’accueil</a>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

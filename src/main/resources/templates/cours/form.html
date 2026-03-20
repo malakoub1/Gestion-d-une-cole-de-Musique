@@ -5,48 +5,50 @@
     <title>Formulaire Cours</title>
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background: #f8fafc;
-            margin: 0;
-            padding: 0;
         }
 
         .container {
-            width: 550px;
-            margin: 40px auto;
+            width: 560px;
+            margin: 35px auto;
             background: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
         }
 
-        h1 {
-            color: #1e3a8a;
+        h2 {
             text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
-            margin-top: 15px;
+            margin-top: 14px;
             margin-bottom: 6px;
             font-weight: bold;
         }
 
         input, select {
             width: 100%;
-            padding: 10px;
+            padding: 11px;
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         button {
-            margin-top: 20px;
             width: 100%;
+            margin-top: 22px;
+            padding: 12px;
             background: #2563eb;
             color: white;
             border: none;
-            padding: 12px;
             border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
         }
 
@@ -54,49 +56,56 @@
             background: #1d4ed8;
         }
 
-        .back {
+        .back-link {
             display: block;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 16px;
             text-decoration: none;
             color: #1e3a8a;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/menu :: menu"></div>
+
 <div class="container">
-    <h1 th:text="${cours.id == null} ? 'Ajouter un cours' : 'Modifier un cours'"></h1>
+    <h2 th:text="${cours.id == null} ? 'Ajouter un cours' : 'Modifier un cours'"></h2>
 
     <form th:action="@{/cours/save}" th:object="${cours}" method="post">
         <input type="hidden" th:field="*{id}">
 
-        <label>Jour</label>
-        <input type="text" th:field="*{jour}" placeholder="Ex: Lundi" required>
+        <label for="jour">Jour</label>
+        <input id="jour" type="text" th:field="*{jour}" placeholder="Ex: Lundi" required>
 
-        <label>Heure de début</label>
-        <input type="time" th:field="*{heureDebut}" required>
+        <label for="heureDebut">Heure de début</label>
+        <input id="heureDebut" type="time" th:field="*{heureDebut}" required>
 
-        <label>Durée en minutes</label>
-        <input type="number" th:field="*{dureeMin}" required>
+        <label for="dureeMin">Durée (minutes)</label>
+        <input id="dureeMin" type="number" th:field="*{dureeMin}" required>
 
-        <label>Niveau</label>
-        <input type="text" th:field="*{niveau}" placeholder="Débutant, Intermédiaire..." required>
+        <label for="niveau">Niveau</label>
+        <input id="niveau" type="text" th:field="*{niveau}" placeholder="Débutant, Intermédiaire..." required>
 
-        <label>Professeur</label>
-        <select th:field="*{prof}" required>
+        <label for="profId">Professeur</label>
+        <select id="profId" name="profId" required>
             <option value="">-- Choisir un professeur --</option>
             <option th:each="prof : ${profs}"
                     th:value="${prof.id}"
-                    th:text="${prof.nom + ' - ' + prof.specialite}">
+                    th:text="${prof.nom + ' - ' + prof.specialite}"
+                    th:selected="${cours.prof != null and cours.prof.id == prof.id}">
             </option>
         </select>
 
         <button type="submit">Enregistrer</button>
     </form>
 
-    <a class="back" th:href="@{/cours}">← Retour à la liste</a>
+    <a class="back-link" th:href="@{/cours}">← Retour à la liste</a>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

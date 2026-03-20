@@ -5,18 +5,17 @@
     <title>Statistiques</title>
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background: #f4f6f9;
-            margin: 0;
-            padding: 0;
         }
 
         .container {
-            width: 85%;
-            margin: 40px auto;
+            width: 88%;
+            margin: 35px auto;
         }
 
-        h1 {
+        h2 {
             text-align: center;
             color: #1e3a8a;
             margin-bottom: 30px;
@@ -25,35 +24,35 @@
         .stats-grid {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 22px;
             flex-wrap: wrap;
         }
 
-        .stat-card {
+        .card {
             background: white;
             width: 260px;
             padding: 25px;
-            border-radius: 12px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
         }
 
-        .stat-card h2 {
+        .card h3 {
             color: #2563eb;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .stat-card p {
-            font-size: 28px;
+        .card p {
+            font-size: 30px;
             font-weight: bold;
             margin: 0;
             color: #111827;
         }
 
-        .back {
+        .back-link {
             display: block;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 28px;
             text-decoration: none;
             color: #1e3a8a;
             font-weight: bold;
@@ -62,28 +61,33 @@
 </head>
 <body>
 
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/menu :: menu"></div>
+
 <div class="container">
-    <h1>Tableau de bord - Statistiques</h1>
+    <h2>Tableau de bord - Statistiques</h2>
 
     <div class="stats-grid">
-        <div class="stat-card">
-            <h2>Nombre de cours</h2>
+        <div class="card">
+            <h3>Nombre de cours</h3>
             <p th:text="${nbCoursSemaine}"></p>
         </div>
 
-        <div class="stat-card">
-            <h2>Instruments disponibles</h2>
+        <div class="card">
+            <h3>Instruments disponibles</h3>
             <p th:text="${nbInstrumentsDisponibles}"></p>
         </div>
 
-        <div class="stat-card">
-            <h2>Instruments indisponibles</h2>
+        <div class="card">
+            <h3>Instruments indisponibles</h3>
             <p th:text="${nbInstrumentsIndisponibles}"></p>
         </div>
     </div>
 
-    <a class="back" th:href="@{/}">← Retour à l’accueil</a>
+    <a class="back-link" th:href="@{/}">← Retour à l’accueil</a>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

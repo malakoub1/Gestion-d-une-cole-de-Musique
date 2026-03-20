@@ -3,10 +3,12 @@ package com.example.Gestion.d.une.ecole.de.musique.Controller;
 import com.example.Gestion.d.une.ecole.de.musique.Service.CoursService;
 import com.example.Gestion.d.une.ecole.de.musique.Service.ProfService;
 import com.example.Gestion.d.une.ecole.de.musique.entity.Cours;
+import com.example.Gestion.d.une.ecole.de.musique.entity.Prof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 @RequestMapping("/cours")
@@ -36,7 +38,9 @@ public class CoursController {
     }
 
     @PostMapping("/save")
-    public String saveCours(@ModelAttribute Cours cours) {
+    public String saveCours(@ModelAttribute Cours cours, @RequestParam("profId") Long profId) {
+        Prof prof = profService.getById(profId);
+        cours.setProf(prof);
         coursService.save(cours);
         return "redirect:/cours";
     }

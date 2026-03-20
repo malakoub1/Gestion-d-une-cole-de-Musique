@@ -5,48 +5,50 @@
     <title>Formulaire Professeur</title>
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background: #f8fafc;
-            margin: 0;
-            padding: 0;
         }
 
         .container {
-            width: 500px;
-            margin: 40px auto;
+            width: 520px;
+            margin: 35px auto;
             background: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
         }
 
-        h1 {
-            color: #1e3a8a;
+        h2 {
             text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
-            margin-top: 15px;
+            margin-top: 14px;
             margin-bottom: 6px;
             font-weight: bold;
         }
 
         input {
             width: 100%;
-            padding: 10px;
+            padding: 11px;
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         button {
-            margin-top: 20px;
             width: 100%;
+            margin-top: 22px;
+            padding: 12px;
             background: #2563eb;
             color: white;
             border: none;
-            padding: 12px;
             border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
         }
 
@@ -54,34 +56,40 @@
             background: #1d4ed8;
         }
 
-        .back {
+        .back-link {
             display: block;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 16px;
             text-decoration: none;
             color: #1e3a8a;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/menu :: menu"></div>
+
 <div class="container">
-    <h1 th:text="${prof.id == null} ? 'Ajouter un professeur' : 'Modifier un professeur'"></h1>
+    <h2 th:text="${prof.id == null} ? 'Ajouter un professeur' : 'Modifier un professeur'"></h2>
 
     <form th:action="@{/profs/save}" th:object="${prof}" method="post">
         <input type="hidden" th:field="*{id}">
 
-        <label>Nom</label>
-        <input type="text" th:field="*{nom}" required>
+        <label for="nom">Nom</label>
+        <input id="nom" type="text" th:field="*{nom}" required>
 
-        <label>Spécialité</label>
-        <input type="text" th:field="*{specialite}" placeholder="Ex: Piano, Guitare..." required>
+        <label for="specialite">Spécialité</label>
+        <input id="specialite" type="text" th:field="*{specialite}" placeholder="Ex: Piano, Guitare, Violon..." required>
 
         <button type="submit">Enregistrer</button>
     </form>
 
-    <a class="back" th:href="@{/profs}">← Retour à la liste</a>
+    <a class="back-link" th:href="@{/profs}">← Retour à la liste</a>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
