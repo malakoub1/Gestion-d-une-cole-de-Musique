@@ -47,5 +47,8 @@ L’application propose également des fonctionnalités de filtrage et de statis
 ## Video Demo
 
 
-https://github.com/user-attachments/assets/7c1ce000-f27d-4b69-bc8b-018faf1e7050
+
+https://github.com/user-attachments/assets/70cbdb8d-9c45-4948-969d-0d6b38df9d8a
+
+
 
